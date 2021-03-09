@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vue.js</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <!-- Vue.js -->
+        <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+        
+    </head>
+    <body>
+        <main id="app">    
+            <div v-show="!inPageProduct">
+                <h1>Liste des produits</h1>
+                <div v-for="(product, i) in products.data">
+                    <ul>
+                        <li>
+                            <img :src="product.image1">
+                            <h4>{{ product.title }}: {{ product.price }}€</h4>
+                            <p>{{ product.description }}</p>
+                            <button @click="showProduct(i)">en savoir +</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div v-show="inPageProduct">
+                <header>
+                    <!-- Nav Start -->
+                    <div>
+                        <a @click="homeLink" href="index.html">Retour</a>
+                    </div>
+                    <!-- Nav End -->
+                </header>
+                <!-- Start page-top-banner section -->
+                <section>
+                    <h1>{{ currentProduct.title }}</h1>
+                    <div class="text-center">
+                        <img :src="currentProduct.image1">
+                        <img :src="currentProduct.image2">
+                        <img :src="currentProduct.image3">
+                    </div>
+                    <br>
+                    <div>
+                        <strong>Description:</strong> {{ currentProduct.long_description }}
+                        <strong>
+                            <p>{{ currentProduct.price }}€</p>
+                        </strong>
+                    </div>
+                    <button @click="showBasket(i)">ajouter au panier</button>            
+                </section>
+                <!-- End product-details section -->
+            </div>
+            
+            <div v-show="inPageBasket">
+                <header>
+                    <!-- Nav Start -->
+                    <div>
+                        <a @click="homeLink" href="#banner-section">Retour</a>
+                    </div>
+                    <!-- Nav End -->
+                </header>
+                <p>{{ currentProduct.title }}€</p>
+                <p>{{ currentProduct.price }}€</p>
+                <button @click="showBasket(i)">Payer</button> 
+                
+            </div>
+        </main>
+
+        <!-- JS -->
+        <script src="home.js"></script>
+    </body>
+</html>
